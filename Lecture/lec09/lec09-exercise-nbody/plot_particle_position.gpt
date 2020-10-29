@@ -1,0 +1,70 @@
+
+# -----------------------------------------------------------
+# GNUPLOT script for showing particle position
+# -----------------------------------------------------------
+
+
+reset
+
+
+# target files
+# -----------------------------------------------------------
+FILE_IN_PREFIX  = 'Data'
+FILE_OUT_PREFIX = 'Fig__XXX'
+START_ID        = 0
+END_ID          = 50
+DELTA_ID        = 1
+PAUSE           = 0.05  # <= 0.0 --> mouse
+VIEW            = 1     # (0/1/2/3) = 3D/xy/yz/xz
+
+
+# terminal
+# -----------------------------------------------------------
+set term x11 enhanced
+
+
+# plot style
+# -----------------------------------------------------------
+#set key reverse Left spacing 2 right
+#set format x "10^{%T}"
+#set format y "10^{%T}"
+ set pointsize 0.6
+#set xyplane at 0.0
+ set xrange [-0.6:+0.6]
+ set yrange [-0.6:+0.6]
+ set zrange [-0.6:+0.6]
+
+ if ( VIEW == 0 ) set view equal xyz; set xlabel "x"; set ylabel "y"; set zlabel "z";
+ if ( VIEW == 1 ) set size ratio -1 ; set xlabel "x"; set ylabel "y";
+ if ( VIEW == 2 ) set size ratio -1 ; set xlabel "y"; set ylabel "z";
+ if ( VIEW == 3 ) set size ratio -1 ; set xlabel "x"; set ylabel "z";
+
+
+# loop over all files
+# -----------------------------------------------------------
+do for [ID=START_ID:END_ID:DELTA_ID] {
+#  set the input and output filenames
+   FILE_IN = sprintf( '%s_%04d', FILE_IN_PREFIX, ID )
+
+
+#  set title
+   set title sprintf( 'DataID %04d', ID )
+   print sprintf( '   Plotting DataID %04d ...', ID )
+
+
+#  plot
+   if ( VIEW == 0 ) { splot FILE_IN u 1:2:3 w p pt 5 notitle }
+   if ( VIEW == 1 ) {  plot FILE_IN u 1:2   w p pt 5 notitle }
+   if ( VIEW == 2 ) {  plot FILE_IN u 2:3   w p pt 5 notitle }
+   if ( VIEW == 3 ) {  plot FILE_IN u 1:3   w p pt 5 notitle }
+
+
+   if ( PAUSE <= 0.0 ) { pause mouse } else { pause PAUSE };
+
+   ID = ID + DELTA_ID
+   if ( ID < END_ID ) { reread }
+}
+
+pause -1
+
+

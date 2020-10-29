@@ -1,0 +1,26 @@
+#!/bin/bash
+#PBS -N Parallel 
+#PBS -M turquoisea.tsai@gmail.com 
+#PBS -m abe
+#PBS -k oe
+#PBS -q workq
+#PBS -l nodes=1:ppn=16
+#PBS -l walltime=1:00:00
+
+cd $PBS_O_WORKDIR
+
+#for N in 16 32 64 128 256 512 1024 2048
+#do
+#    for NThread in {17..26}
+#    do
+#        ./a.out $NThread $N 1.9 >> result.txt
+#    done
+#done
+
+
+#for N in 16 32 64 128 256 512
+#do
+#    ./c.out $N 1.9 >> result_cpu.txt
+#done
+
+./c.out 512 1.9 >> result_cpu.txt
