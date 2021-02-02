@@ -3,6 +3,16 @@ Course _Computational Astrophysics_ from NTU.
 
 ## Quick Search and Tags
 
+|   Folder   |                          Topics                         |
+|:----------:|:-------------------------------------------------------:|
+| Homework 1 |          Advection Equation, Diffusion Equation         |
+| Homework 2 | Riemann Problem, AMR Code, Constrained Transport Method |
+| Homework 3 |                     Poisson Equation                    |
+| Homework 4 |               Convolution, Power Spectrum               |
+| Homework 5 |                    N-Body Simulation                    |
+| Homework 6 |                          OpenMP                         |
+| Homework 7 |                         OpenMPI                         |
+
 ## Homework
 
 Homework questions are named as `hwX-X.png`, my reports are named as `report_hwX.pdf`
